@@ -1,2 +1,58 @@
 # Jobe
 Contains the code for the Jobe robot lawn mower driver program
+
+### Phases
+* Camera code
+    * Get Github repository and IDEA set up
+    * Write pygame code simulator, with stubbed out modules
+    * Get basic Python code running on Raspberry Pi
+    * Implement camera module, with image detection logic
+
+* Wheel motor code
+    * Buy lawn mower and wheel chair
+    * Order motor controller
+    * Remove wheels, connect to motor controller, to Raspberry Pi
+    * Implement code to send signals to motor controller
+
+* Assembly
+    * Buy alternator
+    * Hook wheels and electronics to mower frame
+    * Hook alternator to engine, connect to motor controller
+    * Debug and revise code
+
+
+### Code
+* Go forward until sees short grass, use [bytes](https://docs.python.org/3/library/stdtypes.html#bytes) in Python to control motors
+* Run forward according to overlap variable
+* Turn 90 degrees to the left by having right wheel move, left wheel stopped
+* Go forward, constantly adjusting to stay inline with mowed grass on the right
+
+
+### Controls
+* Put Raspberry Pi into control box
+* Put Sabertooth [into](https://www.amazon.com/Sabertooth-Dual-25A-Motor-Driver/dp/B008OMQUXC?SubscriptionId=AKIAILSHYYTFIVPWUY6Q&tag=duckduckgo-d-20&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B008OMQUXC) control box
+* [Hook](https://www.raspberrypi.org/learning/getting-started-with-picamera/) Pi Camera to Raspberry Pi (camera port)
+* Hook Sabertooth to components
+    * [Alternator](https://www.amazon.com/Electrical-ADR0152-Self-Excited-90-01-3125S-70-01-7127SE/dp/B0081S9C16) (12V one wire)       
+    * [Raspberry Pi](https://www.raspberrypi.org/forums/viewtopic.php?f=37&t=12067) (5V, GPIO headers)
+        * Another [source](https://www.youtube.com/watch?v=QCNoVRgETRc)                                  
+    * [Motors](https://www.youtube.com/watch?v=ruHEJGudIjs) (motor wires)
+        * Another [source](https://www.intorobotics.com/2-simple-methods-choose-motors-wheel-drive-robots/)
+* [Hook](https://www.youtube.com/watch?v=ruHEJGudIjs?t=3m32s) Alternator to mower engine
+
+
+### Frame
+* Mount 1 inch bars to existing lawn mower frame
+* Create a lever that will lock choke mechanism to "on" position
+* Connect 90 degree-capable wheels to bars
+* Hook one servo moter to each of the wheels
+* Bolt alternator to mower frame
+* Connect water-proof control box to frame
+* Mount camera to frame
+* [Hook](https://theepicenter.com/blog/generator-lawn-mower-vertical/) alternator to motor
+
+
+### Already Existing
+* Husqvarna: $1999.95 just to get in the door
+* LawnBott: Also $2000+ to get in the door
+* [Summary](http://www.toptenreviews.com/home/outdoor/best-robot-lawn-mowers/)
