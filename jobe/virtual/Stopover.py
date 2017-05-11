@@ -31,6 +31,9 @@ class StopOver:
         self._long_grass_color = pygame.Color(0, 135, 38, 255)
         self._short_grass_color = pygame.Color(0, 201, 57, 255)
 
+        # Set up a rect that we'll just keep adding to
+        self._mower_path = pygame.Rect(0, 0, 0, 0)
+
         # Load the yard file into memory
         self._load_yard_file()
 
@@ -50,18 +53,32 @@ class StopOver:
                 # Append the new line to the yard data
                 self._yard_data.append(new_line)
 
-    def draw_yard(self):
+    def draw_yard(self, mower_x, mower_y, mower_angle):
         """This method will render the current frame"""
+        pygame.time.delay(10)
 
-        # Draw the mowed, short grass underneath
+        # Render the short grass underneath
         short_grass = pygame.Surface((512, 512))
         short_grass.fill(self._short_grass_color)
         self._screen.blit(short_grass, (0, 0))
 
-        # Draw the un-mowed, long grass over the top, with a mowed border
+        # Define the long grass
         long_grass = pygame.Surface((480, 480))
         long_grass.fill(self._long_grass_color)
+
+        # Rotate the mower and gets its rectangle
+        rotated_mower = pygame.transform.rotate(self._mower, mower_angle)
+        mower_rectangle = rotated_mower.get_rect()
+
+        # Add the mower's current rectangle to its cumulative travelled path
+        mower_rectangle.left = mower_x - 16
+        mower_rectangle.top = mower_y - 16
+        self._mower_path = self._mower_path.union(mower_rectangle)
+
+        # Render the mower's path so far, the mower itself, plus the long grass
+        long_grass.fill(self._short_grass_color, rect=self._mower_path)
         self._screen.blit(long_grass, (16, 16))
+        self._screen.blit(rotated_mower, (mower_x, mower_y))
 
         # Now, loop through the board and draw the trees
         current_x = 0

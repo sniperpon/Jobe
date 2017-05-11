@@ -9,11 +9,11 @@ class Brain:
         self._logger = logger
         self._eyes = eyes
         self._legs = legs
-        self._scan_cycles = 0
+        self._scanned_degrees = 0
 
     def loop(self):
         """This is the main AI loop"""
-        if self._scan_cycles >= 256:
+        if self._scanned_degrees >= 360:
             return
         else:
             if self._eyes.short_grass_in_frame():
@@ -28,6 +28,4 @@ class Brain:
                     self._legs.turn_left()
             else:
                 self._legs.go_forward()
-
-            # Restart the loop
-            self.loop()
+        self.loop()
