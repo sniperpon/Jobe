@@ -28,9 +28,9 @@ class StopOver:
         self._tree_image = pygame.image.load(
             "jobe/resources/Tree.png"
         ).convert()
-        self._mower = Mower(pygame.image.load(
-            "jobe/resources/Arrow.png"
-        ).convert())
+        self._mower = Mower(
+            pygame.image.load("jobe/resources/Arrow.png").convert()
+        )
         self._lawn_file_path = "jobe/resources/yard.dat"
 
         # Define our colors
@@ -58,6 +58,17 @@ class StopOver:
 
                 # Append the new line to the yard data
                 self._yard_data.append(new_line)
+
+    def is_mower_hitting_mowed_grass(self):
+        """This method will return if the mower is colliding with the mowed"""
+        collisions = pygame.sprite.spritecollide(
+            self._mower,
+            self._mowed_parts,
+            False
+        )
+
+        # Did any collisions occur?
+        return len(collisions) > 0
 
     def draw_yard(self, mower_x, mower_y, mower_angle, first_time=False):
         """This method will render the current frame"""
@@ -99,13 +110,18 @@ class StopOver:
         else:
 
             # Rotate the mower
-            rotated_mower = self._mower.rotate_mower(mower_angle)
-
-            # Have the mower cut the grass where it is presently
-            self._mowed_parts.add(MowedPart(
-                self._short_grass_color,
+            rotated_mower = self._mower.rotate_mower(
                 mower_y,
                 mower_x,
+                mower_angle
+            )
+
+            # Have the mower cut the grass where it is presently
+            mowed_position = self._mower.get_trail_spot(mower_angle)
+            self._mowed_parts.add(MowedPart(
+                self._short_grass_color,
+                mowed_position[1],
+                mowed_position[0],
                 rotated_mower.get_width(),
                 rotated_mower.get_height()
             ))

@@ -10,7 +10,7 @@ class SimulationCamera:
 
     def short_grass_in_frame(self):
         """This method will determine if there is short grass visible"""
-        return True
+        return self._yard.is_mower_hitting_mowed_grass()
 
     def short_grass_lined_up(self):
         """This method will determine if the short grass is lined up"""

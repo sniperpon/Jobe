@@ -18,13 +18,13 @@ class Brain:
         else:
             if self._eyes.short_grass_in_frame():
                 if self._eyes.short_grass_lined_up() == ShortGrassSide.Left:
-                    self._scan_cycles = 0
+                    self._scanned_degrees = 0
                     self._legs.turn_right()
                 elif self._eyes.short_grass_lined_up() == ShortGrassSide.Right:
-                    self._scan_cycles = 0
+                    self._scanned_degrees = 0
                     self._legs.turn_left()
                 else:
-                    self._scan_cycles += 1
+                    self._scanned_degrees += 1
                     self._legs.turn_left()
             else:
                 self._legs.go_forward()

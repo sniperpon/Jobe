@@ -1,4 +1,5 @@
 import pygame
+import math
 
 
 class Mower(pygame.sprite.Sprite):
@@ -17,6 +18,16 @@ class Mower(pygame.sprite.Sprite):
         # Set the initial coordinates
         self.set_new_mower_location(0, 0)
 
+    def get_trail_spot(self, angle):
+        """This method will return the X and Y coordinates of where the
+        mower just mowed"""
+        radians = math.radians(angle)
+        x_value = self.rect.left + (math.cos(radians))
+        y_value = self.rect.top + (math.sin(radians))
+
+        # Return our value
+        return x_value, y_value
+
     def set_new_mower_location(self, top, left):
         """This method will set the mower to a new spot"""
         image_rect = self._image.get_rect()
@@ -26,7 +37,8 @@ class Mower(pygame.sprite.Sprite):
         # Set the class rectangle to that of the image
         self.rect = image_rect
 
-    def rotate_mower(self, angle):
+    def rotate_mower(self, top, left, angle):
         """This method will rotate the mower to the desired angle, and will
         return its Surface"""
+        self.set_new_mower_location(top, left)
         return pygame.transform.rotate(self._image, angle)

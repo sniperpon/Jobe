@@ -7,9 +7,9 @@ class SimulationMover:
     def __init__(self, yard):
         """This constructor will initialize the class"""
         self._yard = yard
-        self._mower_x = 448
+        self._mower_x = 256
         self._mower_y = 64
-        self._mower_angle = 45
+        self._mower_angle = -45
 
         # Render the board, initially
         self._yard.draw_yard(
@@ -23,9 +23,9 @@ class SimulationMover:
         """This method will move the robot forward"""
 
         # Determine the new X and Y coordinates
-        radians = (math.pi / 180) * (self._mower_angle - 90)
-        self._mower_x = self._mower_x + 15 * math.cos(radians)
-        self._mower_y = self._mower_y + 15 * math.sin(radians)
+        radians = math.radians(self._mower_angle)
+        self._mower_x += math.cos(radians)
+        self._mower_y += math.sin(radians)
 
         # Re-draw the yard now that we've moved
         self._yard.draw_yard(
