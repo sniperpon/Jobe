@@ -15,7 +15,8 @@ class SimulationMover:
         self._yard.draw_yard(
             self._mower_x,
             self._mower_y,
-            self._mower_angle
+            self._mower_angle,
+            True
         )
 
     def go_forward(self):

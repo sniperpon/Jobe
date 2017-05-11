@@ -1,4 +1,5 @@
 import pygame
+from jobe.virtual.MowedPart import MowedPart
 
 
 class StopOver:
@@ -31,6 +32,9 @@ class StopOver:
         self._long_grass_color = pygame.Color(0, 135, 38, 255)
         self._short_grass_color = pygame.Color(0, 201, 57, 255)
 
+        # Set up the sprite group for the mowed parts
+        self._mowed_parts = pygame.sprite.Group()
+
         # Load the yard file into memory
         self._load_yard_file()
 
@@ -50,34 +54,51 @@ class StopOver:
                 # Append the new line to the yard data
                 self._yard_data.append(new_line)
 
-    def draw_yard(self, mower_x, mower_y, mower_angle):
+    def draw_yard(self, mower_x, mower_y, mower_angle, first_time=False):
         """This method will render the current frame"""
         pygame.time.delay(10)
 
-        # Render the short grass underneath
-        short_grass = pygame.Surface((512, 512))
-        short_grass.fill(self._short_grass_color)
-        self._screen.blit(short_grass, (0, 0))
+        # Do this initial rendering only on the first frame
+        if first_time:
+            # Render the short grass underneath
+            short_grass = pygame.Surface((512, 512))
+            short_grass.fill(self._short_grass_color)
+            self._screen.blit(short_grass, (0, 0))
 
-        # Render the long grass over the top
-        long_grass = pygame.Surface((512, 512))
-        long_grass.fill(self._long_grass_color)
-        self._screen.blit(long_grass, (0, 0))
+            # Render the long grass over the top
+            long_grass = pygame.Surface((512, 512))
+            long_grass.fill(self._long_grass_color)
+            self._screen.blit(long_grass, (0, 0))
 
-        # Rotate the mower and render it
-        rotated_mower = pygame.transform.rotate(self._mower, mower_angle)
-        self._screen.blit(rotated_mower, (mower_x, mower_y))
-
-        # Now, loop through the board and draw the trees
-        current_x = 0
-        current_y = 0
-        for row in self._yard_data:
-            for tile in row:
-                if tile == "T":
-                    self._screen.blit(self._tree, (current_x, current_y))
-                current_x += self._tile_size
+            # Now, loop through the board and draw the trees and mowed parts
             current_x = 0
-            current_y += self._tile_size
+            current_y = 0
+            for row in self._yard_data:
+                for tile in row:
+                    if first_time and tile == "T":
+                        # Draw a tree
+                        self._screen.blit(self._tree, (current_x, current_y))
+                    if tile == "M":
+                        # Add a new mowed part to the group
+                        self._mowed_parts.add(MowedPart(
+                            self._short_grass_color,
+                            current_x,
+                            current_y,
+                            self._tile_size,
+                            self._tile_size
+                        ))
+                    current_x += self._tile_size
+                current_x = 0
+                current_y += self._tile_size
 
-        # Display the buffer
+        # Do this stuff every frame
+        else:
+            # Rotate the mower and render it
+            rotated_mower = pygame.transform.rotate(self._mower, mower_angle)
+            self._screen.blit(rotated_mower, (mower_x, mower_y))
+
+            # We're done looping, draw the mowed parts group
+            self._mowed_parts.draw(self._screen)
+
+        # We're done! Display the buffer
         pygame.display.update()
