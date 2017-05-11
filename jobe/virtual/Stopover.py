@@ -1,5 +1,6 @@
 import pygame
 from jobe.virtual.MowedPart import MowedPart
+from jobe.virtual.Mower import Mower
 
 
 class StopOver:
@@ -23,9 +24,13 @@ class StopOver:
         )
         pygame.display.set_caption("Jobe Simulator")
 
-        # Define our images and paths
-        self._mower = pygame.image.load("jobe/resources/Arrow.png").convert()
-        self._tree = pygame.image.load("jobe/resources/Tree.png").convert()
+        # Define the tree image, the mower sprite, and the lawn data path
+        self._tree_image = pygame.image.load(
+            "jobe/resources/Tree.png"
+        ).convert()
+        self._mower = Mower(pygame.image.load(
+            "jobe/resources/Arrow.png"
+        ).convert())
         self._lawn_file_path = "jobe/resources/yard.dat"
 
         # Define our colors
@@ -60,12 +65,8 @@ class StopOver:
 
         # Do this initial rendering only on the first frame
         if first_time:
-            # Render the short grass underneath
-            short_grass = pygame.Surface((512, 512))
-            short_grass.fill(self._short_grass_color)
-            self._screen.blit(short_grass, (0, 0))
 
-            # Render the long grass over the top
+            # Render the un-mowed grass
             long_grass = pygame.Surface((512, 512))
             long_grass.fill(self._long_grass_color)
             self._screen.blit(long_grass, (0, 0))
@@ -77,7 +78,10 @@ class StopOver:
                 for tile in row:
                     if first_time and tile == "T":
                         # Draw a tree
-                        self._screen.blit(self._tree, (current_x, current_y))
+                        self._screen.blit(
+                            self._tree_image,
+                            (current_x, current_y)
+                        )
                     if tile == "M":
                         # Add a new mowed part to the group
                         self._mowed_parts.add(MowedPart(
@@ -93,8 +97,9 @@ class StopOver:
 
         # Do this stuff every frame
         else:
+
             # Rotate the mower
-            rotated_mower = pygame.transform.rotate(self._mower, mower_angle)
+            rotated_mower = self._mower.rotate_mower(mower_angle)
 
             # Have the mower cut the grass where it is presently
             self._mowed_parts.add(MowedPart(
