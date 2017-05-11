@@ -4,6 +4,10 @@ from jobe.eyes.ShortGrassSide import ShortGrassSide
 class SimulationCamera:
     """This is the camera class we will use for simulation mode"""
 
+    def __init__(self, yard):
+        """This constructor will initialize the class"""
+        self._yard = yard
+
     def short_grass_in_frame(self):
         """This method will determine if there is short grass visible"""
         return ShortGrassSide.Left

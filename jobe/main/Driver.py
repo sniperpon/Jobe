@@ -1,6 +1,7 @@
 import argparse
 from jobe.main.Logger import Logger
 from jobe.main.Brain import Brain
+from jobe.virtual.Stopover import StopOver
 from jobe.eyes.SimulationCamera import SimulationCamera
 from jobe.eyes.RealCamera import RealCamera
 from jobe.legs.SimulationMover import SimulationMover
@@ -43,7 +44,12 @@ class Driver:
             self._logger.write_to_log("Executing in simulation mode")
 
             # Prepare the simulation module instances
-            brain = Brain(self._logger, SimulationCamera(), SimulationMover())
+            yard = StopOver()
+            brain = Brain(
+                self._logger,
+                SimulationCamera(yard),
+                SimulationMover(yard)
+            )
 
         if self._args.mode == "real":
             self._logger.write_to_log("Executing in real mode")
