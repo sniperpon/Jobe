@@ -93,12 +93,21 @@ class StopOver:
 
         # Do this stuff every frame
         else:
-            # Rotate the mower and render it
+            # Rotate the mower
             rotated_mower = pygame.transform.rotate(self._mower, mower_angle)
-            self._screen.blit(rotated_mower, (mower_x, mower_y))
 
-            # We're done looping, draw the mowed parts group
+            # Have the mower cut the grass where it is presently
+            self._mowed_parts.add(MowedPart(
+                self._short_grass_color,
+                mower_y,
+                mower_x,
+                rotated_mower.get_width(),
+                rotated_mower.get_height()
+            ))
+
+            # Draw the mowed parts and the mower itself
             self._mowed_parts.draw(self._screen)
+            self._screen.blit(rotated_mower, (mower_x, mower_y))
 
         # We're done! Display the buffer
         pygame.display.update()
