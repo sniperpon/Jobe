@@ -3,8 +3,8 @@ Contains the code for the Jobe robot lawn mower driver program
 
 ### Phases
 * Camera code
-    * Get Github repository and IDEA set up
-    * Write pygame code simulator, with stubbed out modules
+    * ~~Get Github repository and IDEA set up~~
+    * ~~Write pygame code simulator, with stubbed out modules~~
     * Get basic Python code running on Raspberry Pi
     * Implement camera module, with image detection logic
 
