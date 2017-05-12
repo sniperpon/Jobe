@@ -16,7 +16,7 @@ class Mower(pygame.sprite.Sprite):
         self.rect = self._image.get_rect()
 
         # Set the initial coordinates
-        self._set_new_mower_location(0, 0)
+        self._set_new_mower_location(32, 32)
 
     def _set_new_mower_location(self, top, left):
         """This method will set the mower to a new spot"""
@@ -31,8 +31,8 @@ class Mower(pygame.sprite.Sprite):
         """This method will return the X and Y coordinates of where the
         mower just mowed"""
         radians = math.radians(angle)
-        x_value = self.rect.left + (math.cos(radians))
-        y_value = self.rect.top + (math.sin(radians))
+        x_value = self.rect.left + math.cos(radians)
+        y_value = self.rect.top + math.sin(radians)
 
         # Return our value
         return x_value, y_value

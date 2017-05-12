@@ -16,16 +16,32 @@ class Brain:
         if self._scanned_degrees >= 360:
             return
         else:
+            # Do we see short grass?
             if self._eyes.short_grass_in_frame():
-                if self._eyes.short_grass_lined_up() == ShortGrassSide.Left:
+
+                # Is the grass to the right of our offset? Turn to line it up
+                if self._eyes.short_grass_lined_up() == ShortGrassSide.Right:
                     self._scanned_degrees = 0
                     self._legs.turn_right()
-                elif self._eyes.short_grass_lined_up() == ShortGrassSide.Right:
+
+                # Is the grass to the left of our offset? Turn to line it up
+                elif self._eyes.short_grass_lined_up() == ShortGrassSide.Left:
                     self._scanned_degrees = 0
                     self._legs.turn_left()
+
+                # We're lined up! Move forward
+                elif self._eyes.short_grass_lined_up() == ShortGrassSide.Good:
+                    self._legs.go_forward()
+
+                # Something happened; back up, and start scanning for grass
                 else:
                     self._scanned_degrees += 1
+                    self._legs.go_backwards()
                     self._legs.turn_left()
+
+            # We don't see any short grass; move forward
             else:
                 self._legs.go_forward()
+
+        # Restart the loop!
         self.loop()

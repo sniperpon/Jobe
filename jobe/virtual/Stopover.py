@@ -39,6 +39,7 @@ class StopOver:
 
         # Set up the sprite group for the mowed parts
         self._mowed_parts = pygame.sprite.Group()
+        self._newly_mowed_parts = pygame.sprite.Group()
 
         # Load the yard file into memory
         self._load_yard_file()
@@ -117,7 +118,7 @@ class StopOver:
 
             # Have the mower cut the grass where it is presently
             mowed_position = self._mower.get_trail_spot(mower_angle)
-            self._mowed_parts.add(MowedPart(
+            self._newly_mowed_parts.add(MowedPart(
                 self._short_grass_color,
                 mowed_position[1],
                 mowed_position[0],
@@ -127,6 +128,7 @@ class StopOver:
 
             # Draw the mowed parts and the mower itself
             self._mowed_parts.draw(self._screen)
+            self._newly_mowed_parts.draw(self._screen)
             self._screen.blit(rotated_mower, (mower_x, mower_y))
 
         # We're done! Display the buffer
