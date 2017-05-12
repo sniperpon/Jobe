@@ -110,10 +110,9 @@ class StopOver:
         else:
 
             # Rotate the mower
-            rotated_mower = self._mower.rotate_mower(
+            rotated_mower = self._mower.reposition_mower(
                 mower_y,
-                mower_x,
-                mower_angle
+                mower_x
             )
 
             # Have the mower cut the grass where it is presently

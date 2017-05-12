@@ -9,7 +9,7 @@ class SimulationMover:
         self._yard = yard
         self._mower_x = 256
         self._mower_y = 64
-        self._mower_angle = -45
+        self._mower_angle = 45
 
         # Render the board, initially
         self._yard.draw_yard(
