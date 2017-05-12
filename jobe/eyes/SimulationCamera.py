@@ -15,3 +15,7 @@ class SimulationCamera:
     def short_grass_lined_up(self):
         """This method will determine if the short grass is lined up"""
         return None
+
+    def large_object_ahead(self):
+        """This method will check to see if there is a large object present"""
+        return False
