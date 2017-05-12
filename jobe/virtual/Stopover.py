@@ -29,7 +29,7 @@ class StopOver:
             "jobe/resources/Tree.png"
         ).convert()
         self._mower = Mower(
-            pygame.image.load("jobe/resources/Arrow.png").convert()
+            pygame.image.load("jobe/resources/Mower.png").convert()
         )
         self._lawn_file_path = "jobe/resources/yard.dat"
 
