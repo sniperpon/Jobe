@@ -41,4 +41,10 @@ class Mower(pygame.sprite.Sprite):
         """This method will rotate the mower to the desired angle, and will
         return its Surface"""
         self.set_new_mower_location(top, left)
-        return pygame.transform.rotate(self._image, angle)
+
+        # Do some fancy work to rotate without the image distorting
+        original_rect = self._image.get_rect()
+        rotated_image = pygame.transform.rotate(self._image, angle)
+        rot_rect = original_rect.copy()
+        rot_rect.center = rotated_image.get_rect().center
+        return rotated_image.subsurface(rot_rect).copy()
