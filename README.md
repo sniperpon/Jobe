@@ -66,6 +66,7 @@ Contains the code for the Jobe robot lawn mower driver program
     * pip install jobe
 * [Here](https://makemypi.wordpress.com/2016/12/19/remote-debug-on-raspberry-pi-by-pycharm/) is how to get remote debugging working
     * Only supported in [Ultimate Edition](https://www.jetbrains.com/idea/buy/#edition=personal)
+* Helpful pygame example sprite code [here](http://thepythongamebook.com/en:pygame:step014)
 
 
 ### Already Existing
