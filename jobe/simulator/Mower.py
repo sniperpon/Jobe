@@ -1,6 +1,5 @@
 import pygame
 import math
-from jobe.simulator.Action import Action
 
 
 class Mower(pygame.sprite.Sprite):
@@ -23,14 +22,14 @@ class Mower(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self._undo_method = None
 
-    def update(self, trees):
+    def update(self, obstacles):
         """This method is called by pygame's group, each frame"""
         self.rect.center = (self._left, self._top)
 
         # Are we colliding with a tree? Then undo our last action
         if (
             self._undo_method is not None
-            and len(pygame.sprite.spritecollide(self, trees, False)) > 0
+            and len(pygame.sprite.spritecollide(self, obstacles, False)) > 0
         ):
             self._undo_method()
 

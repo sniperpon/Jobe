@@ -2,6 +2,7 @@ import sys
 import pygame
 from jobe.simulator.Mower import Mower
 from jobe.simulator.Grass import Grass
+from jobe.simulator.Grass import GrassType
 from jobe.simulator.Tree import Tree
 
 
@@ -30,10 +31,12 @@ class Simulator:
 
         # Prepare our game objects
         self._grasses = pygame.sprite.Group()
-        self._grasses.add(Grass(info.current_w, info.current_h))
+        self._grasses.add(Grass(
+            0, 0, info.current_w, info.current_h, GrassType.Tall
+        ))
+        self._obstacles = pygame.sprite.Group()
         self._mowers = pygame.sprite.Group()
-        self._mowers.add(Mower(256, 256, 270, 1))
-        self._trees = pygame.sprite.Group()
+        self._mowers.add(Mower(32, 32, 270, 1))
 
         # Load the board objects
         self._load_file()
@@ -46,12 +49,12 @@ class Simulator:
 
             # Update all of the sprites
             self._grasses.update()
-            self._trees.update()
-            self._mowers.update(self._trees)
+            self._obstacles.update()
+            self._mowers.update(self._obstacles)
 
             # Draw all of the sprites
             self._grasses.draw(self._screen)
-            self._trees.draw(self._screen)
+            self._obstacles.draw(self._screen)
             self._mowers.draw(self._screen)
 
             # Flip the buffers
@@ -98,7 +101,17 @@ class Simulator:
 
                     # If the character is a tree, then add one to the group
                     if character == "T":
-                        self._trees.add(Tree(current_left, current_top))
+                        self._obstacles.add(Tree(current_left, current_top))
+
+                    # If the character is mowed grass, then add to the group
+                    if character == "M":
+                        self._obstacles.add(Grass(
+                            current_left,
+                            current_top,
+                            self._tile_size,
+                            self._tile_size,
+                            GrassType.Short
+                        ))
 
                     # We're done with a character
                     current_left += self._tile_size
