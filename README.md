@@ -5,7 +5,8 @@ Contains the code for the Jobe robot lawn mower driver program
 * Camera code
     * ~~Get Github repository and IDEA set up~~
     * ~~Write pygame code simulator, with stubbed out modules~~
-    * Get basic Python code running on Raspberry Pi
+    * ~~Get basic Python code running on Raspberry Pi~~
+    * Time-boxed rewrite of simulator using only sprites
     * Implement camera module, with image detection logic
 
 * Wheel motor code
@@ -50,6 +51,21 @@ Contains the code for the Jobe robot lawn mower driver program
 * Connect water-proof control box to frame
 * Mount camera to frame
 * [Hook](https://theepicenter.com/blog/generator-lawn-mower-vertical/) alternator to motor
+
+
+### Misc Notes
+* To get virtualenv created:
+    * sudo apt-get install virtualenvwrapper
+    * sudo apt-get install python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev
+    * Add snippet to .bashrc file, source .bashrc
+    * workon
+    * mkdir .virtualenv
+    * cd .virtualenv
+    * virtualenv -p /usr/bin/python3 jobe
+    * workon jobe
+    * pip install jobe
+* [Here](https://makemypi.wordpress.com/2016/12/19/remote-debug-on-raspberry-pi-by-pycharm/) is how to get remote debugging working
+    * Only supported in [Ultimate Edition](https://www.jetbrains.com/idea/buy/#edition=personal)
 
 
 ### Already Existing
