@@ -38,7 +38,7 @@ class Simulator:
         ))
         self._obstacles = pygame.sprite.Group()
         self._mowers = pygame.sprite.Group()
-        self._mowers.add(Mower(32, 32, 270, 1))
+        self._mowers.add(Mower(256, 256, 270, 1))
 
         # Load the board objects
         self._load_file()
@@ -57,12 +57,12 @@ class Simulator:
             self._obstacles.update()
             self._mowers.update(self._obstacles)
 
-            # Draw all of the sprites
+            # Draw all of the sprites to the back buffer
             self._grasses.draw(self._screen)
             self._obstacles.draw(self._screen)
             self._mowers.draw(self._screen)
 
-            # Flip the buffers
+            # Flip the front and back buffers
             pygame.display.update()
 
     def _process_input(self):
