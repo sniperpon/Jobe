@@ -9,10 +9,11 @@ from jobe.simulator.Tree import Tree
 class Simulator:
     """This is the main driver class for the simulator"""
 
-    def __init__(self):
+    def __init__(self, input_handler):
         """Initialize pygame"""
         pygame.init()
         self._clock = pygame.time.Clock()
+        self._input_handler = input_handler
 
         # How big should the board be? Also set the tile size
         board_x_tiles = 32
@@ -67,19 +68,16 @@ class Simulator:
 
     def _process_input(self):
         """This method will return the input that the user has inputted"""
-        pressed = pygame.key.get_pressed()
-
-        # Read the input and act accordingly
-        if pressed[pygame.K_LEFT]:
+        if self._input_handler.turn_left():
             self._mowers.sprites()[0].rotate_ccw()
-        if pressed[pygame.K_RIGHT]:
+        if self._input_handler.turn_right():
             self._mowers.sprites()[0].rotate_cw()
-        if pressed[pygame.K_UP]:
+        if self._input_handler.move_forward():
             self._mowers.sprites()[0].forward()
-        if pressed[pygame.K_DOWN]:
+        if self._input_handler.move_backwards():
             self._mowers.sprites()[0].backwards()
 
-        # Finally, read pygame's events to look for typed input
+        # Also read pygame's events to look for typed input
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 # Escape quits
