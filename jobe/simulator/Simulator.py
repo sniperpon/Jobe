@@ -87,8 +87,8 @@ class Simulator:
     def _load_file(self):
         """This method will load a file from disk, and add sprites to groups"""
         self._yard_data = []
-        current_left = 0
-        current_top = 0
+        current_left = 8
+        current_top = 8
 
         # Open a handle to the lawn file, loop through each line
         with open(self._lawn_file_path, "r") as file:
@@ -117,7 +117,7 @@ class Simulator:
                     current_left += self._tile_size
 
                 # We're done with a line
-                current_left = 0
+                current_left = 8
                 current_top += self._tile_size
 
                 # Append the new line to the yard data
