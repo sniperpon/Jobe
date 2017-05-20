@@ -67,27 +67,24 @@ class Simulator:
 
     def _process_input(self):
         """This method will return the input that the user has inputted"""
+        pressed = pygame.key.get_pressed()
 
-        # TODO: Implement better input polling in Mower
-        # /questions/16044229/how-to-get-keyboard-input-in-pygame
+        # Read the input and act accordingly
+        if pressed[pygame.K_LEFT]:
+            self._mowers.sprites()[0].rotate_ccw()
+        if pressed[pygame.K_RIGHT]:
+            self._mowers.sprites()[0].rotate_cw()
+        if pressed[pygame.K_UP]:
+            self._mowers.sprites()[0].forward()
+        if pressed[pygame.K_DOWN]:
+            self._mowers.sprites()[0].backwards()
 
+        # Finally, read pygame's events to look for typed input
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 # Escape quits
                 if event.key == pygame.K_ESCAPE:
                     sys.exit()
-                # Left rotates the mower counter-clockwise
-                if event.key == pygame.K_LEFT:
-                    self._mowers.sprites()[0].rotate_ccw()
-                # Right rotates the mower clockwise
-                if event.key == pygame.K_RIGHT:
-                    self._mowers.sprites()[0].rotate_cw()
-                # Up moves the mower forward
-                if event.key == pygame.K_UP:
-                    self._mowers.sprites()[0].forward()
-                # Down moves the mower backwards
-                if event.key == pygame.K_DOWN:
-                    self._mowers.sprites()[0].backwards()
 
     def _load_file(self):
         """This method will load a file from disk, and add sprites to groups"""
