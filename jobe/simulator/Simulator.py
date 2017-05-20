@@ -12,11 +12,13 @@ class Simulator:
     def __init__(self):
         """Initialize pygame"""
         pygame.init()
+        self._clock = pygame.time.Clock()
 
         # How big should the board be? Also set the tile size
         board_x_tiles = 32
         board_y_tiles = 32
         self._tile_size = 16
+        self._yard_data = []
 
         # Set the window's icon, get its info object, and set the file path
         pygame.display.set_icon(pygame.image.load("jobe/resources/Tree.png"))
@@ -44,6 +46,9 @@ class Simulator:
     def run(self):
         """This method contains the main game loop"""
         while 1:
+            # Regulate the frame rate to 60 frames per second
+            self._clock.tick(60)
+
             # Update object statuses based on input
             self._process_input()
 
@@ -86,7 +91,6 @@ class Simulator:
 
     def _load_file(self):
         """This method will load a file from disk, and add sprites to groups"""
-        self._yard_data = []
         current_left = 8
         current_top = 8
 
