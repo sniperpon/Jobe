@@ -39,7 +39,7 @@ class Simulator:
         ))
         self._obstacles = pygame.sprite.Group()
         self._mowers = pygame.sprite.Group()
-        self._mowers.add(Mower(256, 256, 270, 1))
+        self._mowers.add(Mower(256, 48, 270, 1))
 
         # Load the board objects
         self._load_file()
@@ -68,13 +68,33 @@ class Simulator:
 
     def _process_input(self):
         """This method will return the input that the user has inputted"""
-        if self._input_handler.turn_left():
+
+        # Should the mower turn left?
+        if self._input_handler.should_turn_left(
+                self._mowers.sprites()[0],
+                self._obstacles
+        ):
             self._mowers.sprites()[0].rotate_ccw()
-        if self._input_handler.turn_right():
+
+        # Should the mower turn right?
+        if self._input_handler.should_turn_right(
+                self._mowers.sprites()[0],
+                self._obstacles
+        ):
             self._mowers.sprites()[0].rotate_cw()
-        if self._input_handler.move_forward():
+
+        # Should the mower move forward?
+        if self._input_handler.should_move_forward(
+                self._mowers.sprites()[0],
+                self._obstacles
+        ):
             self._mowers.sprites()[0].forward()
-        if self._input_handler.move_backwards():
+
+        # Should the mower move backwards?
+        if self._input_handler.should_move_backwards(
+                self._mowers.sprites()[0],
+                self._obstacles
+        ):
             self._mowers.sprites()[0].backwards()
 
         # Also read pygame's events to look for typed input
