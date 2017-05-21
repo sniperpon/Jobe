@@ -3,6 +3,10 @@ from jobe.main.Logger import Logger
 from jobe.simulator.Simulator import Simulator
 from jobe.simulator.ManualAI import ManualAI
 from jobe.simulator.AutomaticAI import AutomaticAI
+from jobe.real.Real import Real
+from jobe.real.RealAI import RealAI
+from jobe.real.Camera import Camera
+from jobe.real.Wheels import Wheels
 
 
 class Driver:
@@ -53,6 +57,14 @@ class Driver:
 
         if self._args.mode == "real":
             self._logger.write_to_log("Executing in real mode")
+
+            # Execute the program in real-world mowing mode
+            real = Real(RealAI(
+                self._logger),
+                Camera(self._logger),
+                Wheels(self._logger)
+            )
+            real.run()
 
         # Close the logger now that we're done
         self._logger.close_log()
