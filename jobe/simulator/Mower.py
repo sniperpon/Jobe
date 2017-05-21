@@ -10,9 +10,9 @@ class Mower(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         # Degrees: 0 is right, 90 degrees is down, 180 is left, 270 is up
-        self._left = left
-        self._top = top
-        self._degrees = degrees
+        self.left = left
+        self.top = top
+        self.degrees = degrees
         self._speed = speed
 
         # Prepare the mower for rendering
@@ -24,7 +24,7 @@ class Mower(pygame.sprite.Sprite):
 
     def update(self, obstacles):
         """This method is called by pygame's group, each frame"""
-        self.rect.center = (self._left, self._top)
+        self.rect.center = (self.left, self.top)
 
         # Are we colliding with a tree? Then undo our last action
         if (
@@ -35,60 +35,56 @@ class Mower(pygame.sprite.Sprite):
 
     def rotate_ccw(self):
         """This method will adjust the degrees counter clockwise"""
-        self._degrees -= self._speed
+        self.degrees -= self._speed
 
         # If the degrees become less than 0, reset them to 360
-        if self._degrees <= 0:
-            self._degrees = 360
+        if self.degrees <= 0:
+            self.degrees = 360
 
         # Rotate the image
         self.image = pygame.transform.rotate(
             self._orig_image,
-            (self._degrees - 270) * -1)
+            (self.degrees - 270) * -1)
 
         # How would we undo this?
         self._undo_method = self.rotate_cw
-        print("Mower deg: " + str(self._degrees))
 
     def rotate_cw(self):
         """This method will adjust the degrees clockwise"""
-        self._degrees += self._speed
+        self.degrees += self._speed
 
         # If the degrees become greater than 360, reset them to zero
-        if self._degrees >= 360:
-            self._degrees = 0
+        if self.degrees >= 360:
+            self.degrees = 0
 
         # Rotate the image
         self.image = pygame.transform.rotate(
             self._orig_image,
-            (self._degrees - 270) * -1)
+            (self.degrees - 270) * -1)
 
         # How would we undo this?
         self._undo_method = self.rotate_ccw
-        print("Mower deg: " + str(self._degrees))
 
     def forward(self):
         """This method will adjust the mower's position, forward once"""
-        radians = math.radians(self._degrees)
+        radians = math.radians(self.degrees)
 
         # Set the new left and top positions, using... maths...
         for x in range(0, self._speed):
-            self._left += math.cos(radians)
-            self._top += math.sin(radians)
-            print("Mower pos: " + str(self._left) + " x " + str(self._top))
+            self.left += math.cos(radians)
+            self.top += math.sin(radians)
 
         # How would we undo this?
         self._undo_method = self.backwards
 
     def backwards(self):
         """This method will adjust the mower's position, backwards once"""
-        radians = math.radians(self._degrees)
+        radians = math.radians(self.degrees)
 
         # Set the new left and top positions, using... maths...
         for x in range(0, self._speed):
-            self._left -= math.cos(radians)
-            self._top -= math.sin(radians)
-            print("Mower pos: " + str(self._left) + " x " + str(self._top))
+            self.left -= math.cos(radians)
+            self.top -= math.sin(radians)
 
         # How would we undo this?
         self._undo_method = self.forward

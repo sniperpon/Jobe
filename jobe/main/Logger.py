@@ -1,4 +1,5 @@
 import time
+import os
 
 
 class Logger:
@@ -10,7 +11,7 @@ class Logger:
 
     def write_to_log(self, message):
         """This method will write a line to the log file"""
-        self._file.write(message)
+        self._file.write(message + os.linesep)
 
     def close_log(self):
         """This method will close the file handle"""

@@ -47,26 +47,15 @@ class Driver:
             self._logger.write_to_log("Executing in manual simulation mode")
 
             # Execute the simulator in manual mode
-            simulator = Simulator(ManualAI())
+            simulator = Simulator(ManualAI(self._logger))
             simulator.run()
 
         if self._args.mode == "simulation":
             self._logger.write_to_log("Executing in simulation mode")
 
             # Execute the simulator in automatic mode
-            simulator = Simulator(AutomaticAI())
+            simulator = Simulator(AutomaticAI(self._logger))
             simulator.run()
-
-            # Prepare the simulation module instances
-            yard = StopOver()
-            brain = Brain(
-                self._logger,
-                SimulationCamera(yard),
-                AutomaticAI()
-            )
-
-            # Kick off the main loop!
-            brain.loop()
 
         if self._args.mode == "real":
             self._logger.write_to_log("Executing in real mode")
