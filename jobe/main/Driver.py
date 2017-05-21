@@ -1,14 +1,8 @@
 import argparse
 from jobe.main.Logger import Logger
-from jobe.main.Brain import Brain
+from jobe.simulator.Simulator import Simulator
 from jobe.simulator.ManualAI import ManualAI
 from jobe.simulator.AutomaticAI import AutomaticAI
-from jobe.simulator.Simulator import Simulator
-from jobe.virtual.Stopover import StopOver
-from jobe.eyes.SimulationCamera import SimulationCamera
-from jobe.eyes.RealCamera import RealCamera
-from jobe.legs.SimulationMover import SimulationMover
-from jobe.legs.RealMover import RealMover
 
 
 class Driver:
@@ -59,12 +53,6 @@ class Driver:
 
         if self._args.mode == "real":
             self._logger.write_to_log("Executing in real mode")
-
-            # Prepare the actual execution module instances
-            brain = Brain(self._logger, RealCamera(), RealMover())
-
-            # Kick off the main loop!
-            brain.loop()
 
         # Close the logger now that we're done
         self._logger.close_log()
