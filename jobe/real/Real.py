@@ -6,7 +6,7 @@ class Real:
         self._ai = ai
         self._camera = camera
         self._wheels = wheels
-        self._shutoff_cycles = 300
+        self._shutoff_cycles = 16
 
     def run(self):
         """This method contains the actual logic loop"""
@@ -17,7 +17,7 @@ class Real:
 
             # We've hit the limit, shut down
             if cycles >= self._shutoff_cycles:
-                break
+                return
 
             # Determine our next action
             if self._ai.should_turn_left(self._camera):

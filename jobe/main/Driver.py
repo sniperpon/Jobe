@@ -4,8 +4,6 @@ from jobe.simulator.Simulator import Simulator
 from jobe.simulator.ManualAI import ManualAI
 from jobe.simulator.AutomaticAI import AutomaticAI
 from jobe.real.Real import Real
-from jobe.real.RealAI import RealAI
-from jobe.real.Camera import Camera
 from jobe.real.Wheels import Wheels
 
 
@@ -57,6 +55,10 @@ class Driver:
 
         if self._args.mode == "real":
             self._logger.write_to_log("Executing in real mode")
+
+            # Delay the imports to here, so code still runs on non-Pi computers
+            from jobe.real.Camera import Camera
+            from jobe.real.RealAI import RealAI
 
             # Execute the program in real-world mowing mode
             real = Real(RealAI(
