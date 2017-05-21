@@ -67,6 +67,12 @@ Contains the code for the Jobe robot lawn mower driver program
 * [Here](https://makemypi.wordpress.com/2016/12/19/remote-debug-on-raspberry-pi-by-pycharm/) is how to get remote debugging working
     * Only supported in [Ultimate Edition](https://www.jetbrains.com/idea/buy/#edition=personal)
 * Helpful pygame example sprite code [here](http://thepythongamebook.com/en:pygame:step014)
+* Need
+    * [ThunderBorg x2](https://www.piborg.org/thunderborg/thunderborg) = $96.44
+    * [Motor plus wheel x4](https://www.piborg.org/accessories/12v-motor) = $93.80
+    * [Cables x8, half red, half black](https://www.piborg.org/accessories/wire-22awg-red) = $7.82
+    * [Batteries](http://www.robotmarketplace.com/products/batteries_main.html) = $75
+    * Total: $273.06
 
 
 ### Already Existing
