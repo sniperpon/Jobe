@@ -36,13 +36,14 @@ Contains the code for the Jobe robot lawn mower driver program
 
 ### Misc Notes
 * To get virtualenv created:
+    * sudo apt-get install python-opencv
     * sudo apt-get install virtualenvwrapper
-    * sudo apt-get install python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev
+    * sudo apt-get install python2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev
     * Add snippet to .bashrc file, source .bashrc
     * workon
     * mkdir .virtualenv
     * cd .virtualenv
-    * virtualenv -p /usr/bin/python3 jobe
+    * virtualenv -p /usr/bin/python2 jobe
     * workon jobe
     * pip install jobe
 * [Here](https://makemypi.wordpress.com/2016/12/19/remote-debug-on-raspberry-pi-by-pycharm/) is how to get remote debugging working
