@@ -1,0 +1,6 @@
+lcd ../..
+cd Documents/Projects/python
+rm -rf Jobe
+mkdir Jobe
+put -R Jobe
+bye
