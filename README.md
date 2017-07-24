@@ -1,5 +1,7 @@
 # Jobe
-Contains the code for the Jobe robot lawn mower driver program
+Contains the code for the Jobe robot lawn mower driver program.
+
+This is on hiatus at the moment; the camera image processing is going to be substantially more difficult than I'd imagined, to a prohibitive degree. Will need to find a different solution. Beyond that, my new riding mower is so efficient that I'm not certain there is a purpose to this project any longer.
 
 ### Phases
 * Camera code
@@ -55,6 +57,12 @@ Contains the code for the Jobe robot lawn mower driver program
     * [Cables x8, half red, half black](https://www.piborg.org/accessories/wire-22awg-red) = $7.82
     * [Batteries](http://www.robotmarketplace.com/products/batteries_main.html) = $75
     * Total: $273.06
+* OpenCV Links
+    * [Canny edge detection](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_canny/py_canny.html)
+    * [Bounding boxes](http://www.learnopencv.com/how-to-select-a-bounding-box-roi-in-opencv-cpp-python/)
+    * [FAST feature detection](http://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_fast/py_fast.html)
+* [Backup](https://thepihut.com/blogs/raspberry-pi-tutorials/17789160-backing-up-and-restoring-your-raspberry-pis-sd-card) SD card
+    * [Another](https://www.raspberrypi.org/documentation/linux/filesystem/backup.md) link
 
 
 ### Already Existing
